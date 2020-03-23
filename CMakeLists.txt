@@ -54,3 +54,4 @@ endmacro()
 # Add all the examples.
 #
 add_subdirectory(pelib)
+add_subdirectory(utils)

@@ -1,3 +1,10 @@
+# Common RetDec installation CMake script.
+# Individual examples can configure it to produce specific scripts.
+# The following can be set:
+#     RETDEC_INSTALL_DIR
+#     RETDEC_ENABLE_OPTIONS
+#
+
 cmake_minimum_required(VERSION 3.6)
 project(pelib NONE)
 
@@ -8,9 +15,9 @@ ExternalProject_Add(retdec
     SOURCE_DIR ${RETDEC_PATH}
     CMAKE_ARGS
         # Install on passed location.
-        -D CMAKE_INSTALL_PREFIX=${RETDEC_INSTALL_DIR}
+        -D CMAKE_INSTALL_PREFIX=@RETDEC_INSTALL_DIR@
         # Enable only those RetDec components that are actually used.
-        -D RETDEC_ENABLE_PELIB=ON
+        @RETDEC_ENABLE_OPTIONS@
         # Propagate some basic defines.
         -D CMAKE_BUILD_TYPE=Release
         -D CMAKE_C_COMPILER=${CMAKE_C_COMPILER}

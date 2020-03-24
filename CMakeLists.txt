@@ -53,6 +53,8 @@ endmacro()
 
 # Add all the examples.
 #
+
+#add_subdirectory(common)
+add_subdirectory(ctypes)
 #add_subdirectory(pelib)
 #add_subdirectory(utils)
-add_subdirectory(common)

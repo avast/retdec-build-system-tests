@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	if (state == retdec::pdbparser::PDB_STATE_OK)
 	{
 		std::cout << "PDB file loaded OK" << std::endl;
-		return 1;
+		return 0;
 	}
 	else
 	{

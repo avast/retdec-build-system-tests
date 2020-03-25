@@ -54,12 +54,13 @@ endmacro()
 # Add all the examples.
 #
 
+add_subdirectory(ar-extractor)
 #add_subdirectory(common)
 #add_subdirectory(config)
 #add_subdirectory(configtool)
 #add_subdirectory(crypto)
 #add_subdirectory(ctypes)
-add_subdirectory(idr2pat)
+#add_subdirectory(idr2pat)
 #add_subdirectory(pdbparser)
 #add_subdirectory(pelib)
 #add_subdirectory(serdes)

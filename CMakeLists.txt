@@ -54,7 +54,8 @@ endmacro()
 # Add all the examples.
 #
 
-add_subdirectory(ar-extractor)
+#add_subdirectory(ar-extractor)
+add_subdirectory(ar-extractortool)
 #add_subdirectory(common)
 #add_subdirectory(config)
 #add_subdirectory(configtool)

@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.8)
 
 project(retdec-build-system-tests
     LANGUAGES C CXX
@@ -55,7 +55,8 @@ endmacro()
 #
 
 #add_subdirectory(common)
-add_subdirectory(crypto)
+add_subdirectory(config)
+#add_subdirectory(crypto)
 #add_subdirectory(ctypes)
 #add_subdirectory(pdbparser)
 #add_subdirectory(pelib)

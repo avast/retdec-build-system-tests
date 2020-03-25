@@ -55,7 +55,8 @@ endmacro()
 #
 
 #add_subdirectory(common)
-add_subdirectory(config)
+#add_subdirectory(config)
+add_subdirectory(configtool)
 #add_subdirectory(crypto)
 #add_subdirectory(ctypes)
 #add_subdirectory(pdbparser)

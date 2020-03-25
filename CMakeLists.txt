@@ -55,9 +55,10 @@ endmacro()
 #
 
 #add_subdirectory(common)
+add_subdirectory(crypto)
 #add_subdirectory(ctypes)
 #add_subdirectory(pdbparser)
 #add_subdirectory(pelib)
 #add_subdirectory(serdes)
 #add_subdirectory(utils)
-add_subdirectory(yaracpp)
+#add_subdirectory(yaracpp)

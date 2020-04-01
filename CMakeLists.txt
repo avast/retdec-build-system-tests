@@ -18,39 +18,50 @@ endif()
 # ARGV0 : RETDEC_ENABLE_OPTIONS
 #
 macro(retdec_install)
+    set(RETDEC_DOWNLOAD_DIR "${CMAKE_CURRENT_BINARY_DIR}/retdec-download")
     set(RETDEC_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/retdec-install")
 
     # Configure RetDec installation script.
     set(RETDEC_ENABLE_OPTIONS "${ARGV0}")
     configure_file(
         "${PROJECT_SOURCE_DIR}/retdec-install.cmake.in"
-        "${CMAKE_CURRENT_BINARY_DIR}/retdec-download/CMakeLists.txt"
+        "${RETDEC_DOWNLOAD_DIR}/CMakeLists.txt"
     )
 
     # Configure RetDec build.
     execute_process(
         COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/retdec-download"
+        WORKING_DIRECTORY "${RETDEC_DOWNLOAD_DIR}"
     )
 
     # Build and install RetDec.
     if(MSVC)
         execute_process(
             COMMAND "${CMAKE_COMMAND}" --build . --config Release -- -m
-            WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/retdec-download"
+            WORKING_DIRECTORY "${RETDEC_DOWNLOAD_DIR}"
         )
     else()
         include(ProcessorCount)
         ProcessorCount(N)
         execute_process(
             COMMAND "${CMAKE_COMMAND}" --build . -- -j${N}
-            WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/retdec-download"
+            WORKING_DIRECTORY "${RETDEC_DOWNLOAD_DIR}"
         )
     endif()
 
+    # Move installed directory to test that installed RetDec movable.
+    # I.e. no absolute paths, etc.
+    set(RETDEC_INSTALL_DIR_MOVED "${CMAKE_CURRENT_BINARY_DIR}/retdec-install-moved")
+    file(RENAME "${RETDEC_INSTALL_DIR}" "${RETDEC_INSTALL_DIR_MOVED}")
+
+    # Remove build direcotry to test that no build artifacts are needed by
+    # installed RetDec.
+    # I.e. no absolute paths to build directory.
+    file(REMOVE_RECURSE "${RETDEC_DOWNLOAD_DIR}")
+
     # Add RetDec installation directory to CMake prefix
     # -> find_package() will be able to find RetDec and its components.
-    list(APPEND CMAKE_PREFIX_PATH "${RETDEC_INSTALL_DIR}")
+    list(APPEND CMAKE_PREFIX_PATH "${RETDEC_INSTALL_DIR_MOVED}")
 endmacro()
 
 # Add all the examples.
@@ -98,5 +109,5 @@ endmacro()
 #add_subdirectory(stacofintool)
 #add_subdirectory(unpacker)
 #add_subdirectory(unpackertool)
-#add_subdirectory(utils)
+add_subdirectory(utils)
 #add_subdirectory(yaracpp)

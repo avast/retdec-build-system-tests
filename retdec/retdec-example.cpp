@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-#include <retdec/loader/loader.h>
+#include <retdec/retdec/retdec.h>
 
 int main(int argc, char* argv[])
 {
@@ -12,24 +12,12 @@ int main(int argc, char* argv[])
 	}
 	std::string input = argv[1];
 
-	auto image = retdec::loader::createImage(input);
-	if (image)
+	retdec::common::FunctionSet fs;
+	auto res = retdec::disassemble(input, &fs);
+
+	for (auto& f : fs)
 	{
-		std::cout << "File '" << input << "':" << std::endl;
-		std::cout << "\t" << "base addr    = "
-				<< std::hex << image->getBaseAddress() << std::endl;
-		std::cout << "\t" << "segments num = "
-				<< image->getNumberOfSegments() << std::endl;
-		for (const auto& s : image->getSegments())
-		{
-			std::cout << "\t" << "seg "	<< s->getName()
-				<< " @ " << std::hex << s->getAddress() << std::endl;
-		}
-	}
-	else
-	{
-		std::cerr << "Error: parsing failed for '" << input << "'\n";
-		return 1;
+		std::cout << f.getStart() << " @ " << f.getName() << std::endl;
 	}
 
 	return 0;

@@ -1,0 +1,2 @@
+
+retdec_install("-D RETDEC_TESTS=ON -D RETDEC_DEV_TOOLS=ON")

@@ -5,6 +5,8 @@ project(retdec-build-system-tests
     LANGUAGES C CXX
 )
 
+set(RETDEC_VERSION ${RETDEC_VERSION})
+
 # Check that all required variables are set.
 #
 if(NOT RETDEC_PATH)

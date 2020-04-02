@@ -61,7 +61,13 @@ macro(retdec_install)
 
     # Add RetDec installation directory to CMake prefix
     # -> find_package() will be able to find RetDec and its components.
-    list(APPEND CMAKE_PREFIX_PATH "${RETDEC_INSTALL_DIR_MOVED}")
+    # NOTE:
+    #   This may cause confusion between multiple installed RetDecs.
+    #   E.g. utils & yaracpp installed, retdec-config.cmake from utils tries
+    #   to find yaracpp config because it thinks it is its component.
+    #list(APPEND CMAKE_PREFIX_PATH "${RETDEC_INSTALL_DIR_MOVED}")
+    # This does not have the same problem.
+    set(retdec_DIR "${RETDEC_INSTALL_DIR_MOVED}/share/retdec/cmake")
 endmacro()
 
 # Add all the examples.

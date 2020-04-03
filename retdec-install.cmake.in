@@ -6,7 +6,8 @@
 #
 
 cmake_minimum_required(VERSION 3.6)
-project(pelib NONE)
+
+project(retdec NONE)
 
 include(ExternalProject)
 

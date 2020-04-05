@@ -30,7 +30,7 @@ macro(retdec_install)
 
     # Configure RetDec build.
     execute_process(
-        COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" -A "${CMAKE_GENERATOR_PLATFORM}" .
         WORKING_DIRECTORY "${RETDEC_DOWNLOAD_DIR}"
     )
 
